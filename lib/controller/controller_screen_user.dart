@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:taskify_app/model/user_model.dart';
 
 class UserController extends GetxController {
-   RxList users = <UserModel>[].obs;
+  RxList<UserModel> users = <UserModel>[].obs;
   RxBool isLoading = false.obs;
 
   Future<void> getUser() async {
@@ -17,13 +17,13 @@ class UserController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        final List data = jsonDecode(response.body);
-        users.value = data.map((e) => UserModel.fromJson(e)).toList();
+        final List<dynamic> data = jsonDecode(response.body);
+        users.assignAll(data.map((e) => UserModel.fromJson(e)).toList());
       } else {
-        print("Error: ${response.statusCode}");
+        Get.log("Error: ${response.statusCode}");
       }
     } catch (e) {
-      print("Exception: $e");
+      Get.log("Exception: $e");
     } finally {
       isLoading.value = false;
     }

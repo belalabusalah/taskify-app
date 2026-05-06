@@ -26,10 +26,10 @@ class UserModel {
       name: json["name"] ?? "",
       username: json["username"] ?? "",
       email: json["email"] ?? "",
-      address: json["address"] ?? "",
+      address: Address.fromJson(json["address"] ?? ""),
       phone: json["phone"] ?? "",
       website: json["website"] ?? "",
-      company: json["company"] ?? "",
+      company: Company.fromJson(json["company"] ?? ""),
     );
   }
 
@@ -46,6 +46,3 @@ class UserModel {
     };
   }
 }
-
-
-
